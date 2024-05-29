@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView.builder(
         itemCount: Notes.length,
         itemBuilder: (context, index) {
-          return NoteCard(note: Notes[index], index: index);
+          return NoteCard(note: Notes[index], index: index, onNoteDeleted: onNoteDeleted);
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  void onNewNoteDeleted(int index) {
+  void onNoteDeleted(int index) {
     Notes.removeAt(index);
     setState(() {});
   }
