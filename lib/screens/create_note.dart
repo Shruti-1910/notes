@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:notes/models/note_model.dart';
 
 class CreateNote extends StatefulWidget {
-  const CreateNote({super.key});
+  const CreateNote({super.key, required this.onNewNoteCreated});
+
+  final Function(Note) onNewNoteCreated;
 
   @override
   State<CreateNote> createState() => _CreateNoteState();
@@ -38,6 +41,25 @@ class _CreateNoteState extends State<CreateNote> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (titleController.text.isEmpty) {
+            return;
+          }
+          if (bodyController.text.isEmpty) {
+            return;
+          }
+
+          final note = Note(
+            body: bodyController.text,
+            title: titleController.text,
+          );
+
+          widget.onNewNoteCreated(note);
+          Navigator.of(context).pop();
+        },
+        child: const Icon(Icons.save),
       ),
     );
   }
