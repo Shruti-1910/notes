@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes/models/note_model.dart';
 import 'package:notes/screens/create_note.dart';
+import 'package:notes/screens/widgets/note_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,37 +21,15 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView.builder(
         itemCount: Notes.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    Notes[index].title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(height: 10,),
-                   Text(
-                    Notes[index].body,
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          );
+          return NoteCard(note: Notes[index], index: index);
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => CreateNote(onNewNoteCreated: onNewNoteCreated,)));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => CreateNote(
+                    onNewNoteCreated: onNewNoteCreated,
+                  )));
         },
         child: const Icon(Icons.add),
       ),
