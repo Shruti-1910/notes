@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/screens/create_note.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => const CreateNote()));
         },
         child: const Icon(Icons.add),
       ),
